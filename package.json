@@ -9,9 +9,9 @@
   "gxDependencies": [
     {
       "author": "whyrusleeping",
-      "hash": "QmTprEaAA2A9bst5XH7exuyi5KzNMK3SEDNN8rBDnKWcUS",
+      "hash": "QmNp85zy9RLrQ5oQD4hPyS39ezrrXpcaa7R4Y9kxdWQLLQ",
       "name": "go-cid",
-      "version": "0.7.17"
+      "version": "0.7.18"
     },
     {
       "author": "multiformats",
@@ -31,6 +31,6 @@
   "license": "",
   "name": "go-block-format",
   "releaseCmd": "git commit -a -m \"gx publish $VERSION\"",
-  "version": "0.1.3"
+  "version": "0.1.4"
 }
 
