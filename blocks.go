@@ -15,7 +15,7 @@ type Block = blocks.Block
 // Deprecated: Use blocks.BasicBlock instead.
 type BasicBlock = blocks.BasicBlock
 
-// Deprecated: Use blocks.ErrWrongHash instead.
+// Deprecated: Use blocks.NewBlock instead.
 func NewBlock(data []byte) *blocks.BasicBlock {
 	return blocks.NewBlock(data)
 }
