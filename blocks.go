@@ -12,15 +12,12 @@ var ErrWrongHash = blocks.ErrWrongHash
 // Deprecated: Use blocks.Block instead.
 type Block = blocks.Block
 
-// Deprecated: Use blocks.BasicBlock instead.
-type BasicBlock = blocks.BasicBlock
-
 // Deprecated: Use blocks.NewBlock instead.
-func NewBlock(data []byte) *blocks.BasicBlock {
+func NewBlock(data []byte) blocks.Block {
 	return blocks.NewBlock(data)
 }
 
 // Deprecated: Use blocks.NewBlockWithCid instead.
-func NewBlockWithCid(data []byte, c cid.Cid) (*blocks.BasicBlock, error) {
+func NewBlockWithCid(data []byte, c cid.Cid) (blocks.Block, error) {
 	return blocks.NewBlockWithCid(data, c)
 }
