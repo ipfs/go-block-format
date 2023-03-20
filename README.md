@@ -1,4 +1,4 @@
-# ⚠️ This repository has been moved to https://github.com/ipfs/go-libipfs/tree/main/blocks.
+# ⚠️ This repository has been moved to https://github.com/ipfs/boxo/tree/main/blocks.
 
 go-block-format
 ==================
