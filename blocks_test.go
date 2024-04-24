@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"testing"
 
-	cid "github.com/ipfs/go-cid"
-	u "github.com/ipfs/go-ipfs-util"
+	u "github.com/ipfs/boxo/util"
+	"github.com/ipfs/go-cid"
 	mh "github.com/multiformats/go-multihash"
 )
 
