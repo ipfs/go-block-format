@@ -16,66 +16,57 @@ import (
 // according to the contents. It is currently used only when debugging.
 var ErrWrongHash = errors.New("data did not match given hash")
 
-// Block provides abstraction for blocks implementations.
-type Block interface {
-	RawData() []byte
-	Cid() cid.Cid
-	String() string
-	Loggable() map[string]interface{}
-}
-
-// A BasicBlock is a singular block of data in ipfs. It implements the Block
-// interface.
-type BasicBlock struct {
+// A Block is a singular block of data in ipfs. This is some bytes addressed by a hash.
+type Block struct {
 	cid  cid.Cid
 	data []byte
 }
 
 // NewBlock creates a Block object from opaque data. It will hash the data.
-func NewBlock(data []byte) *BasicBlock {
+func NewBlock(data []byte) Block {
 	// TODO: fix assumptions
-	return &BasicBlock{data: data, cid: cid.NewCidV0(u.Hash(data))}
+	return Block{data: data, cid: cid.NewCidV0(u.Hash(data))}
 }
 
 // NewBlockWithCid creates a new block when the hash of the data
 // is already known, this is used to save time in situations where
 // we are able to be confident that the data is correct.
-func NewBlockWithCid(data []byte, c cid.Cid) (*BasicBlock, error) {
+func NewBlockWithCid(data []byte, c cid.Cid) (Block, error) {
 	if u.Debug {
 		chkc, err := c.Prefix().Sum(data)
 		if err != nil {
-			return nil, err
+			return Block{}, err
 		}
 
 		if !chkc.Equals(c) {
-			return nil, ErrWrongHash
+			return Block{}, ErrWrongHash
 		}
 	}
-	return &BasicBlock{data: data, cid: c}, nil
+	return Block{data: data, cid: c}, nil
 }
 
 // Multihash returns the hash contained in the block CID.
-func (b *BasicBlock) Multihash() mh.Multihash {
+func (b Block) Multihash() mh.Multihash {
 	return b.cid.Hash()
 }
 
 // RawData returns the block raw contents as a byte slice.
-func (b *BasicBlock) RawData() []byte {
+func (b Block) RawData() []byte {
 	return b.data
 }
 
 // Cid returns the content identifier of the block.
-func (b *BasicBlock) Cid() cid.Cid {
+func (b Block) Cid() cid.Cid {
 	return b.cid
 }
 
 // String provides a human-readable representation of the block CID.
-func (b *BasicBlock) String() string {
+func (b Block) String() string {
 	return fmt.Sprintf("[Block %s]", b.Cid())
 }
 
 // Loggable returns a go-log loggable item.
-func (b *BasicBlock) Loggable() map[string]interface{} {
+func (b Block) Loggable() map[string]interface{} {
 	return map[string]interface{}{
 		"block": b.Cid().String(),
 	}
