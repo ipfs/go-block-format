@@ -16,11 +16,21 @@ import (
 // according to the contents. It is currently used only when debugging.
 var ErrWrongHash = errors.New("data did not match given hash")
 
+// Interface provides abstraction for blocks implementations.
+type Interface interface {
+	RawData() []byte
+	Cid() cid.Cid
+	String() string
+	Loggable() map[string]interface{}
+}
+
 // A Block is a singular block of data in ipfs. This is some bytes addressed by a hash.
 type Block struct {
 	cid  cid.Cid
 	data []byte
 }
+
+var _ Interface = Block{}
 
 // NewBlock creates a Block object from opaque data. It will hash the data.
 func NewBlock(data []byte) Block {
