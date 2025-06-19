@@ -18,10 +18,10 @@ var ErrWrongHash = errors.New("data did not match given hash")
 
 // Block provides abstraction for blocks implementations.
 //
-// Many different packages use opjects that contain Block information, and this
-// interface allows those objects to be passed to APIs that require blocks. The
-// Block interface provides a common basis for interoperability between many
-// packages in the IPFS exosystem that exchange block information.
+// Many different packages use objects that contain Block information, and this
+// interface allows those objects to be passed to APIs as a Block. The Block
+// interface provides a common basis for interoperability between many packages
+// in the IPFS ecosystem that exchange block information.
 type Block interface {
 	RawData() []byte
 	Cid() cid.Cid
