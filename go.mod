@@ -1,6 +1,6 @@
 module github.com/ipfs/go-block-format
 
-go 1.23.8
+go 1.23.10
 
 require (
 	github.com/ipfs/boxo v0.32.0
