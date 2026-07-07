@@ -95,3 +95,38 @@ func TestManualHash(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestNewBlockWithPrefix(t *testing.T) {
+	data := []byte("yet another test")
+	hash, err := mh.Sum(data, mh.SHA2_256, -1)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	c := cid.NewCidV0(hash)
+	prefix := c.Prefix()
+
+	block, err := NewBlockWithPrefix(data, prefix)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if !block.Cid().Equals(c) {
+		t.Fatal("block CID is not equal to CID")
+	}
+	if !bytes.Equal(block.RawData(), data) {
+		t.Fatal("block has wrong data")
+	}
+
+	prefix2 := block.Cid().Prefix()
+	if prefix2 != prefix {
+		t.Fatal("prefixes are not equal")
+	}
+
+	// Test with bad prefix.
+	prefix = cid.Prefix{}
+	_, err = NewBlockWithPrefix(data, prefix)
+	if err == nil {
+		t.Fatal("expected error with bad prefix")
+	}
+}
