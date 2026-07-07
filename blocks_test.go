@@ -10,7 +10,6 @@ import (
 )
 
 func TestBlocksBasic(t *testing.T) {
-
 	// Test empty data
 	empty := []byte{}
 	NewBlock(empty)
